@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Daydream Believer</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+<h1 id="title">Daydream Believer</h1>
+
+<video src="http://www.cs.tufts.edu/comp/20/daydream_believer.webm" id="music_video" controls></video>
+<div id="lyrics"></div>
+
+<script>
+
+function karaoke () {
+	
+	var vid = document.getElementById("music_video");
+	var lyr = document.getElementById("lyrics");
+	
+
+	if ( vid.currentTime > 5 && vid.currentTime < 36 ) {
+		
+	lyr.innerHTML = "<p>" + "Oh, I could hide" + "<br>" + "neath the wings" + "<br>" + "Of the bluebird as she sings" + "<br>" + "But it rings and I rise," + "<br>" + "Wipe the sleep out of my eyes" + "<br>" + "My havin' razor's cold and it stings." + "</p>" + '<img src="http://cdn.bulbagarden.net/upload/thumb/4/4e/144Articuno.png/250px-144Articuno.png" alt="bluebird">' ;
+
+	}
+
+	else if ( vid.currentTime > 36 && vid.currentTime < 56) 
+	{		lyr.innerHTML = "<p>" + "Cheer up, Sleepy Jean" + "<br>" +  "Oh, what can it mean." + "<br>" + "To a daydream believer" + "<br>" + "And a homecoming queen" + "</p>";
+		} 
+	else if ( vid.currentTime > 56 && vid.currentTime < 82) 
+	{		lyr.innerHTML = "<p>" + "You once thought of me" + "<br>" + 
+"As a white knight on a steed." + "<br>" + 
+"Now you know how happy I can be." + "<br>" + 
+"Oh, and our good times start and end" + "<br>" + "Without dollar one to spend." + "<br>" +  "But how much, baby, do we really need." + "</p>" + '<img alt="whiteknight" src="http://www.masonicleader.com/wp-content/uploads/2011/03/White_Knight.jpg">';
+	} 
+	else if ( vid.currentTime > 82 && vid.currentTime < 120) 
+	{		lyr.innerHTML = "<p>" + "Cheer up, Sleepy Jean" + "<br>" +  "Oh, what can it mean." + "<br>" + "To a daydream believer" + "<br>" + "And a homecoming queen" + "</p>";
+		} 
+		 
+	else if ( vid.currentTime > 120 && vid.currentTime < 128) 
+	{		lyr.innerHTML = "<p>" + "</p>";
+		} 
+	else if ( vid.currentTime > 129 && vid.currentTime < 160) 
+	{		lyr.innerHTML = "<p>" + "Cheer up, Sleepy Jean" + "<br>" +  "Oh, what can it mean." + "<br>" + "To a daydream believer" + "<br>" + "And a homecoming queen" + "</p>";
+		} 
+
+
+}
+
+var vid = document.getElementById("music_video");
+
+vid.addEventListener("timeupdate", karaoke, true);
+
+
+
+
+
+
+
+
+
+        //5-36 is first stanza
+        // Complete this section and create a CSS file named style.css
+</script>
+</body>
+</html> 
