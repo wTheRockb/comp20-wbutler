@@ -43,6 +43,68 @@ function getmylocation(){
                 alert("Geolocation is not supported by your web browser.  Upgrade required");
         }
 }
+function drawMap() //fills map, marks self with infowindow
+{
+        
+        me = new google.maps.LatLng(myLat, myLng);        
+        var userIcon = {
+                url: 'ele.jpeg',
+        };
+        var userMarker = new google.maps.Marker({
+                position: me,
+                title: "User",
+                icon: userIcon.url
+        });
+        userMarker.setMap(map);
+
+        var myContent = '<b>' + userMarker.title + '<br></b>' +
+                        '<p><b> Lat: </b>' + myLat + '<br>' +
+                        '<b>Lng: </b>' + myLng + '</p>';
+        var myWindow = new google.maps.InfoWindow({
+                content: myContent
+        });
+        google.maps.event.addListener(myMarker, 'click', function() {
+                myWindow.open(map, myMarker);
+        });
+        getStudents();
+}
+
+function getStudents() { //mingles with api, 
+        var xhr = new XMLHttpRequest();
+        http.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                        var studentList = JSON.parse(xhr.responseText);
+                        loopMarkers(studentList);
+                        loopDrawChars(studentList);
+                }
+        }
+        //var url = "http://chickenofthesea.herokuapp.com/sendLocation";
+        var params = "login=" + "SnowWhite" + "&lat="+ String(myLat) + "&lng=" + String(myLng);
+        xhr.open("POST", "http://chickenofthesea.herokuapp.com/sendLocation", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(params);
+        
+}
+
+function loopMarkers(studentList) { //places fucntion call to make markers for each char and stud, with imges for chars
+        var numChars = studentList.characters.length;
+        var numStuds = studentList.students.length;
+   
+        for (var i = 0; i < numChars; i++) {
+                image = url: String(studentList.characters[i].name) + '.jpg';
+                makeMarker(studentList.characters[i].loc.latitude, 
+                           studentList.characters[i].loc.longitude, 
+                           studentList.characters[i].name,
+                           image);
+        }
+      
+        for (var j = 0; j < numStuds; j++) {
+                makeStudentMarker(studentList.students[j].lat,
+                           studentList.students[j].lng,
+                           studentList.students[j].login,
+                           studentList.students[j].created_at);
+        }
+}
 
 
 
