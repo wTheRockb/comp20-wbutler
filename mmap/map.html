@@ -106,6 +106,57 @@ function loopMarkers(studentList) { //places fucntion call to make markers for e
         }
 }
 
+function makeMarker(lat, lng, title, image) //creates marker and window for entered char
+{
+        
+        var cCoords = new google.maps.LatLng(lat, lng);
+        var cMarker;
+
+        renderLine(cCoords);
+        cMarker = new google.maps.Marker({
+                position: cCoords,
+                title: title,
+                icon: image.url
+        });
+        cMarker.setMap(map);
+                
+        var cContent = '<h1>' + title + '<br></h1>' +
+                        '<p><b> Lat: </b>' + lat + '<br>' +
+                        '<b>Lng: </b>' + lng + '</p>';
+        var cWindow = new google.maps.InfoWindow({
+                content: cContent
+        });
+        google.maps.event.addListener(cMarker, 'click', function() {
+                cWindow.open(map, cMarker);
+        });
+}
+
+function makeStudentMarker(lat, lng, title, timestamp)// same as makeMarker but for students
+{
+        var sCoords = new google.maps.LatLng(lat, lng);
+        var sMarker;
+
+        
+        sMarker = new google.maps.Marker({
+                position: sCoords,
+                title: title,
+        });
+        sMarker.setMap(map);
+
+        
+        var sContent = '<h1>' + title + '<br></h1>' +
+                        '<p><b> Lat: </b>' + lat + '<br>' +
+                        '<b>Lng: </b>' + lng + '</p>';
+        var sWindow = new google.maps.InfoWindow({
+                content: sContent
+        });
+        google.maps.event.addListener(sMarker, 'click', function() {
+                sWindow.close();
+                sWindow.open(map, sMarker);
+        });
+}
+
+
 
 
 
