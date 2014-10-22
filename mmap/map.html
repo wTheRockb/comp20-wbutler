@@ -11,9 +11,6 @@
       </script>
 
 <script>
-// geolocation
-
-
 var myLat;
 var myLng;
 var myLoc = new google.maps.LatLng(myLat, myLng);
@@ -29,10 +26,24 @@ var markerArray = [];
 var markerCArray = [];
 
 function initialize () {
-
+	 map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+	 getmylocation();
 }
-var markerArray = [];
-var markerCArray = [];
+
+function getmylocation(){
+ if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                        myLat = position.coords.latitude;
+                        myLng = position.coords.longitude;
+                        drawMap();
+                });
+        }
+        else {
+                alert("Geolocation is not supported by your web browser.  Upgrade required");
+        }
+}
+
 
 
 
