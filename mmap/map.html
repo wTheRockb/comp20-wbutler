@@ -34,103 +34,7 @@ function initialize () {
 var markerArray = [];
 var markerCArray = [];
 
-/*
-function success(pos) {
-   crd = pos.coords;
 
-  console.log('Your current position is:');
-  console.log('Latitude : ' + crd.latitude);
-  console.log('Longitude: ' + crd.longitude);
-  console.log('More or less ' + crd.accuracy + ' meters.');
-};
-navigator.geolocation.getCurrentPosition(success);
-*/
-
-function initialize(pos) {
-		cred = pos.coords;
-        var mapOptions = {
-          center: { lat: cred.latitude, lng: cred.longitude},
-          zoom: 16
-        };
-        map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
-        navigator.geolocation.getCurrentPosition(fillmap);
-
-      }
-      navigator.geolocation.getCurrentPosition(initialize);
-      google.maps.event.addDomListener(window, 'load', initialize);
-      
-
-function createCoords(lat, lng){
-	urLatLng = new google.maps.LatLng(lat, lng);
-	return urLatLng;
-}
-
-
-function fillmap(pus) {
-	var disLat= pus.coords.latitude;
-	var disLng= pus.coords.longitude;
-	xhr = new XMLHttpRequest();
-	requestInfo = "login=SnowWhite&lat"+ disLat +"&lng=" + disLng;
-	xhr.open('POST', 'http://chickenofthesea.herokuapp.com/sendLocation', true);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	
-	xhr.send(requestInfo);
-	xhr.onreadystatechange = function() {
-		if(xhr.readyState == 4 && xhr.status == 200) {
-				console.log("probs got data back");
-			object = JSON.parse(xhr.responseText);
-			console.log("about ot call");
-			makeMarkers();
-			makeCMarkers();
-		}
-	
-	}
-	
-}
-
-function makeMarkers(){
-	myStuds = object.students;
-	console.log("ay girl");
-	for (i=0; i< myStuds.length; i++)
-	{
-		var lat = myStuds[i].lat;
-		var lng = myStuds[i].lng;
-		markerArray[i] = new google.maps.Marker({
-		    position: createCoords(myStuds[i]["lat"], myStuds[i]["lng"]),
-		    map: map,
-		    title:myStuds[i]["login"]});
-	    markerArray[i].setMap(map);
-	    google.maps.event.addListener(markerArray[i], 'click', function() {
-					infowindow.setContent(this["title"]+ "<br>" + "<p>" + "Latitude: " + this.lat + "<br>" + "Longitude: " + this.lng + "</p>");
-					infowindow.open(map, this);
-				});
-	}
-
-}
-
-function makeCMarkers(){
-	myChars = object.characters;
-	console.log("ay girl this makeCmarkers");
-	for (i=0; i< myChars.length; i++)
-	{
-		lat = myChars[i]["loc"].latitude;
-		lng = myChars[i]["loc"].longitude;
-		markerCArray[i] = new google.maps.Marker({
-	    position: createCoords(myChars[i]["loc"]["latitude"], myChars[i]["loc"]["longitude"]),
-	    map: map,
-	    title: myChars[i]["name"]});
-	    markerCArray[i].setMap(map);
-
-	    google.maps.event.addListener(markerCArray[i], 'click', function() {
-	    			// currLat = object.characters[i]["loc"]["latitude"];
-	    			 //currLng = object.characters[i]["loc"]["longitude"];
-					infowindow.setContent(markerCArray[i]["title"] + "<br>" + "<p>" + "Latitude: " + markerCArray[i]["loc"]["latitude"] + "<br>" + "Longitude: " + markerCArray[i]["loc"]["longitude"] + "</p>");
-					infowindow.open(map, this);
-				});
-	}
-
-}
 
 </script>
 
@@ -141,7 +45,8 @@ function makeCMarkers(){
 <body>
 	<h1> the mordor's maep </h1>
 	<div id="map-canvas"></div>
-	
+	<div id="DistanceDisplay"></div>
+
 
 </body>
 
