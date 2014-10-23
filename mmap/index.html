@@ -96,31 +96,11 @@ function loopMarkers(studentList) { //places fucntion call to make markers for e
    
         for (var i = 0; i < numChars; i++) {
         		//console.log("cases");
-        	switch (studentList.characters[i].name) {
-        		case "batman":
-        			image = "batman.jpg";
-        			break;
-        		case "carmen":
-        			image = "carmen.jpg";
-        			break;
-        		case  "nr":
-        			image = "nr.jpg";
-        		case "hescott":
-        			image = "hescott.jpg";
-        			break;
-        		case "snape":
-        			image = "snape.jpg";
-        			break;
-        		case "waldo":
-        			image = "waldo.jpg";
-        			break;
-
-        	}
+        	
 
                 makeMarker(studentList.characters[i].loc.latitude, 
                            studentList.characters[i].loc.longitude, 
-                           studentList.characters[i].name,
-                           image);
+                           studentList.characters[i].name);
         }
       
         for (var j = 0; j < numStuds; j++) {
@@ -131,20 +111,48 @@ function loopMarkers(studentList) { //places fucntion call to make markers for e
         }
 }
 
-function makeMarker(lat, lng, title, image) //creates marker and window for entered char
+function makeMarker(lat, lng, title) //creates marker and window for entered char
 {
+        console.log(title);
         
         var cCoords = new google.maps.LatLng(lat, lng);
         var cMarker;
+             switch (title) {
+                    case "batman":
+                        image = "batman.png";
+                        
+                        break;
+                    case "carmen":
+                        image = "carmen.png";
+                        console.log("test");
+                        break;
+                    case  "nr":
+                        image = "nr.png";
+                        console.log("test");
+                    case "hescott":
+                        image = "hescott.png";
+                        console.log("test");
+                        break;
+                    case "snape":
+                        image = "snape.png";
+                        console.log("test");
+                        break;
+                    case "waldo":
+                        image = "waldo.png";
+                        console.log("test");
+                        break;
 
-        renderLine(cCoords);
+                }
+
+
+        
         cMarker = new google.maps.Marker({
                 position: cCoords,
                 title: title,
                 icon: image
         });
         cMarker.setMap(map);
-                
+        renderLine(cCoords);     
         var cContent = '<h1>' + title + '<br></h1>' +
                         '<p><b> Lat: </b>' + lat + '<br>' +
                         '<b>Lng: </b>' + lng + '</p>';
