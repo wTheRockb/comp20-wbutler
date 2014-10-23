@@ -1,1 +1,0 @@
-read for Woody Butler's comp20 folder in general. Partially doing this to test if my git config worked properly
