@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>My News Feed</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script>
+	
+
+ $(document).ready(function(){
+   
+  $('div#news').html( localStorage.getItem('totNews'));
+
+  $("input").on('change', function(){
+
+	  	/*if (localStorage.getItem('newsIndex')) {
+
+	  		console.log("got index from local!");
+	  	}*/
+
+	  	var d = new Date();
+	  	newNews = d + " - " + $("input").val();
+	  	currNews = $('div#news').html();
+	 
+	  	totNews = ("<p>" + newNews +"</p>" +  currNews);  
+	  
+	  	$('div#news').html( totNews);
+	  
+
+	  	localStorage.setItem('totNews', totNews);
+  
+  });
+
+
+ });
+	  
+	</script>
+</head>
+
+<body>
+	<h1>My News Feed</h1>
+	<h3>My news update: <input type="text" id="msg" name="msg" size="30" /></h3>
+	<div id="news">News...</div>
+</body>
+</html>
