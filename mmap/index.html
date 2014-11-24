@@ -84,7 +84,7 @@ function getStudents() { //mingles with api,
         }
         var url = "https://boiling-taiga-1920.herokuapp.com/sendlocation";
         var params = "login=" + "SnowWhite" + "&lat="+ String(myLat) + "&lng=" + String(myLng);
-        xhr.open("POST", "https://boiling-taiga-1920.herokuapp.com/sendLocation", true);
+        xhr.open("GET", "https://boiling-taiga-1920.herokuapp.com/sendLocation", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send(params);
         
