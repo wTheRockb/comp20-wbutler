@@ -82,7 +82,7 @@ function getStudents() { //mingles with api,
                         loopDrawChars(studentList);
                 }
         }
-        var url = "https://boiling-taiga-1920.herokuapp.com/sendlocations";
+        var url = "https://boiling-taiga-1920.herokuapp.com/sendlocation";
         var params = "login=" + "SnowWhite" + "&lat="+ String(myLat) + "&lng=" + String(myLng);
         xhr.open("POST", "https://boiling-taiga-1920.herokuapp.com/sendLocation", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
