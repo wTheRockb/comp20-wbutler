@@ -78,8 +78,8 @@ function getStudents() { //mingles with api,
         xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                         var studentList = JSON.parse(xhr.responseText);
-                        loopMarkers(studentList);
-                        loopDrawChars(studentList);
+                        loopMarkers(students);
+                        loopDrawChars(students);
                 }
         }
         var url = "https://boiling-taiga-1920.herokuapp.com/locations";
@@ -90,24 +90,24 @@ function getStudents() { //mingles with api,
         
 }
 
-function loopMarkers(studentList) { //places fucntion call to make markers for each char and stud, with imges for chars
-        var numChars = studentList.characters.length;
-        var numStuds = studentList.students.length;
+function loopMarkers(students) { //places fucntion call to make markers for each char and stud, with imges for chars
+        var numChars = students.characters.length;
+        var numStuds = students.students.length;
    
         for (var i = 0; i < numChars; i++) {
         		//console.log("cases");
         	
 
-                makeMarker(studentList.characters[i].loc.latitude, 
-                           studentList.characters[i].loc.longitude, 
-                           studentList.characters[i].name);
+                makeMarker(students.characters[i].loc.latitude, 
+                           students.characters[i].loc.longitude, 
+                           students.characters[i].name);
         }
       
         for (var j = 0; j < numStuds; j++) {
                 makeStudentMarker(studentList.students[j].lat,
-                           studentList.students[j].lng,
-                           studentList.students[j].login,
-                           studentList.students[j].created_at);
+                           students.students[j].lng,
+                           students.students[j].login,
+                           students.students[j].created_at);
         }
 }
 
@@ -197,8 +197,8 @@ function loopDrawChars(studentList) //draws dem polylines and also shoots html w
 
         for (var k = 0; k < numCharacters; k++) {
                 mod = "<p> Char: " + studentList.characters[k].name + "<br> " +
-                             "Distance: " + haversineFormula(studentList.characters[k].loc.latitude,
-                                                             studentList.characters[k].loc.longitude)
+                             "Distance: " + haversineFormula(students.characters[k].loc.latitude,
+                                                             students.characters[k].loc.longitude)
                              + " Miles </p>";
                 modHTML += mod;
                 mod = "";
