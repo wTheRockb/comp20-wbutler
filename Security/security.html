@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<head>
+
+<title> Woody Butler Security Assesment </title>
+	</head>
+
+	<body>
+
+<h1> Security Analysis of Thomas Addison's Application </h1>
+<h3> By Woody Butler 12/4/2014</h3>	
+
+<h4>Intro<h4>
+
+<p>The purpose of the assignment was to test the security of Tom Addison's heroku webapp. 
+The webapp was used to communicate with a mongoDB database. The webapp and database 
+keep a record of checkins, keeping a login, lat and lng. A vulnerability or hack 
+is considered anything that can be exploited/deceived within the system.</p>
+
+<p>Testing was done without looking at the source code, then more vulnerabilities
+were found through examining the source code. Curl was used for a majority of the attacks.</p>
+
+<h4>Vulnerabilities</h4>
+
+<p>1. No Data Verification</p>
+<p>
+The first most glaring vulnerability found is that there is no data verification in 
+the /sendlocation path. The user can easily lie about login, lattitude and 
+longitude. Below is a screenshot of fake data entered into the system.</p>
+
+<img src="http://i.imgur.com/pWomxvz.png" >
+
+
+<p>The latitude and longitude are faked, and the login is made up as well. Reccomendations
+for this include using the browser's geoip property if avilable, and if not a geoip
+lookup function. Additionally login could be checked against a valid list of logins.</p>
+
+
+<p>2. X-Site Scripting</p>
+<p>Another vulnerability found is the potential for cross-site scripting of javascript. This
+was done by inserting javascript code into the login parameter, which was then run when the
+webapp displayed that login info. A screenshot below of a cross-site scripted alert:</p>
+
+<img src='http://i.imgur.com/iw0IuSI.png' >
+
+<p>Recommendation to sanitize the login further than simply ensure that it is not undefined. </p>
+
+
+<p>3. Database Overloading</p>
+<p>eBcause of the POST Xml HTTP Request being used to fill the database with entries, this
+can be easily automated through shell script or on another webapp. This can fill up the
+mongoDB database with unusable information until there is no room for usable data, or the 
+database crashes. A screenshot of a partially filled database (through shell scripting)
+ is shown:</p>
+
+<img src='http://i.imgur.com/QMjpZei.png' >
+
+<p>Recommendation for this would be to include a timer variable for each domain, which would
+limit how oftena  domain could send a request. </p>
+
+
+
+<p>4. Database Intrusion </p>
+<p>The GET command allows one to view all documents within a database that have a certain login. 
+One can view simply all documents by entering a certain url command. Screenshot of url and 
+returned all items in database:</p>
+
+
+<p>I would recommend sanitizing the login command for the app.get function. </p>
+
+<img src='http://i.imgur.com/bmdmjpp.png' >
+
+
+<h3>Conclusion</h3>
+<p>The above issues represent major security flaws in Tom's webapp. These flaws will inevitably 
+prove too dangerous for future use unless some of the above recommendations are implemented
+or other ways to patch up security holes. </p>
+
+<p>Patching up security issues like this woul take some considerable time, and a typical price
+I would charge for such a service would be approximately $600. The best way to do this would 
+be to make sure to sanitize the database queries, verify and sanitize all input, and limit
+database queries on a time-basis. </p>
+
+</body>
+</html>
+
